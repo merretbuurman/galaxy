@@ -1,0 +1,45 @@
+<tool id="snap_to_network" name="Snap to network (py)" version="0.1.0">
+    <description>Snaps point coordinates to a network.</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <requirements>
+        <requirement type="package">geojson</requirement>
+    </requirements>
+    <command><![CDATA[
+        python /home/mbuurman/galaxy/galaxy/tools/ogc_services/wrap_snap_to_network.py --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --output $galaxy_output
+    ]]></command>
+    <inputs>
+        <param name="coordinate_geojson" type="text" value='{"coordinates":[[-17.25355, -44.885825], [-13.763611, -43.595833]], "type": "MultiPoint"}' area="true" label="Coordinates as GeoJSON Multipoint"></param>
+        <param name="coordinate_csv" type="text" value="-17.25355, -44.885825&#10;-13.763611, -43.595833" area="true" label="Coordinates as csv"></param>
+        <param name="method" type="select" label="Which method to use for snapping:">
+            <option value="distance">Distance</option>
+            <option value="accumulation">Accumulation</option>
+            <option value="both">Both</option>
+        </param>
+        <param name="distance" type="integer" label="Maximum radius in map pixels." value="500"></param>
+        <param name="accumulation" type="float" label="Minimum flow accumulation." value="0.5"></param>
+    </inputs>
+    <outputs>
+        <data name="galaxy_output" format="geojson" />
+    </outputs>
+    <tests>
+        <test>
+            <!--<output name="galaxy_output" file="/galaxy/tools/mytools/test_data/test_output.txt"/>-->
+        </test>
+    </tests>
+    <help><![CDATA[
+        Snapping to some stream network using GRASS via hydrographr's snap-to-network.
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+            @Manual{,
+                title = {httr2: Perform HTTP Requests and Process the Responses},
+                author = {Hadley Wickham},
+                year = {2023},
+                note = {R package version 0.2.3},
+                url = {https://CRAN.R-project.org/package=httr2},
+            }
+        </citation>
+    </citations>
+</tool>
