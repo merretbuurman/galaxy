@@ -95,6 +95,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
                         prog='Calling snap-to-network service from OGC API at localhost:5000 via python',
                         description='This program wants to substitute snap_to_network.R, see https://glowabio.github.io/hydrographr/reference/snap_to_network.html')
+    parser.add_argument('--ogc_service_url', default="http://localhost:500", help='Which service to call, incl. http/https and port, e.g. http://localhost:5000')
     parser.add_argument('--method', default="distance", help='"distance", "accumulation", or "both". Defines if the points are snapped using the distance or flow accumulation.')
     parser.add_argument('--distance', default=500, help='Maximum radius in map pixels. The points will be snapped to the next stream within this radius.')
     parser.add_argument('--accumulation', default=0.5, help='Minimum flow accumulation. Points will be snapped to the next stream with a flow accumulation equal or higher than the given value.')
@@ -129,7 +130,7 @@ if __name__ == '__main__':
 
     ### Assemble the HTTP request
     LOGGER.debug('Assembling the request...')
-    url = 'http://localhost:5000/processes/snap-to-network/execution'
+    url = args.ogc_service_url.rstrip('/')+'/processes/snap-to-network/execution'
     LOGGER.info('This URL will be queried: %s' % url)
     h = {'accept': 'application/json', 'Content-Type': 'application/json'}
     body = {
@@ -146,6 +147,7 @@ if __name__ == '__main__':
 
     ### Make POST request
     LOGGER.debug('Making POST request to server:')
+    print('Making POST request to server:')
     resp = requests.post(url, headers=h, json=body)
     resp_json = resp.json()
     LOGGER.info('Finished making POST request to server! Received HTTP status code: %s' % resp.status_code)
