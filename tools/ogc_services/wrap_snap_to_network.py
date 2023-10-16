@@ -86,6 +86,7 @@ if __name__ == '__main__':
         sys.argv[i] = sys.argv[i].replace('__oc__', '{').replace('__cc__', '}')
         sys.argv[i] = sys.argv[i].replace('__ob__', '[').replace('__cb__', ']')
         sys.argv[i] = sys.argv[i].replace('__dq__', '"')
+        sys.argv[i] = sys.argv[i].replace('__cn__', '')
         LOGGER.debug('Same item after replace: "%s"' % sys.argv[i])
         # https://git.bwcloud.uni-freiburg.de/galaxyproject/galaxy/-/blob/5701fe7e108126fda05c33dfe083bd2c7f370db9/tools/filters/grep.py#L71
 
