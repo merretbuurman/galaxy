@@ -1,4 +1,4 @@
-<tool id="snap_to_network" name="Snap to network (py)" version="0.1.0">
+<tool id="snap_to_network" name="Snap to network" version="0.1.0">
     <description>Snaps point coordinates to a network.</description>
     <stdio>
         <exit_code range="1:" />
@@ -11,7 +11,7 @@
     ]]></command>
     <inputs>
         <param name="coordinate_geojson" type="text" value='{"coordinates":[[-17.25355, -44.885825], [-13.763611, -43.595833]], "type": "MultiPoint"}' area="true" label="Coordinates as GeoJSON Multipoint"></param>
-        <param name="ogc_service_url" type="text" label="Which URL to call, including port." value="http://localhost:5000"></param>
+        <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://localhost:5000"></param>
         <param name="coordinate_csv" type="text" value="-17.25355, -44.885825&#10;-13.763611, -43.595833" area="true" label="Coordinates as csv"></param>
         <param name="method" type="select" label="Which method to use for snapping:">
             <option value="distance">Distance</option>
@@ -30,7 +30,7 @@
         </test>
     </tests>
     <help><![CDATA[
-        Snapping to some stream network using GRASS via hydrographr's snap-to-network.
+        Snap point data to some stream network using GRASS via hydrographr's snap-to-network.
     ]]></help>
     <citations>
         <citation type="bibtex">
