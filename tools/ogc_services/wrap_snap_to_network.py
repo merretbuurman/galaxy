@@ -75,7 +75,7 @@ if __name__ == '__main__':
 
     print('Python script: %s' % sys.argv[0])
 
-    logging.basicConfig(level=logging.INFO, stream=sys.stdout)
+    logging.basicConfig(level=logging.DEBUG, stream=sys.stdout)
 
     ### Replace those weird escaped characters from the string that was passed by Galaxy GUI:
     LOGGER.debug('Python script inputs sys.argv: %s' % sys.argv)
@@ -96,7 +96,7 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(
                         prog='Calling snap-to-network service from OGC API at localhost:5000 via python',
                         description='This program wants to substitute snap_to_network.R, see https://glowabio.github.io/hydrographr/reference/snap_to_network.html')
-    parser.add_argument('--ogc_service_url', default="http://localhost:500", help='Which service to call, incl. http/https and port, e.g. http://localhost:5000')
+    parser.add_argument('--ogc_service_url', default="http://localhost:5000", help='Which service to call, incl. http/https and port, e.g. http://localhost:5000')
     parser.add_argument('--method', default="distance", help='"distance", "accumulation", or "both". Defines if the points are snapped using the distance or flow accumulation.')
     parser.add_argument('--distance', default=500, help='Maximum radius in map pixels. The points will be snapped to the next stream within this radius.')
     parser.add_argument('--accumulation', default=0.5, help='Minimum flow accumulation. Points will be snapped to the next stream with a flow accumulation equal or higher than the given value.')
@@ -120,6 +120,7 @@ if __name__ == '__main__':
     else:
         if len(args.coordinate_csv) == 0:
             LOGGER.info('Using GeoJSON coordinates! %s' % type(args.coordinate_geojson))
+            LOGGER.debug('These are the coordinates that were passed: %s' % args.coordinate_geojson)
             multipoint_to_pass_on = geojson.loads(args.coordinate_geojson)
             LOGGER.debug('Parsed the string geojson to proper geojson object')
         else:
