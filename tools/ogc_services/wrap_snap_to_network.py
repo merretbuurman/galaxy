@@ -10,22 +10,20 @@ LOGGER = logging.getLogger(__name__)
 
 
 '''
-10 Oktober 2023
+Merret, 10 Oktober 2023
 
 Calling this script:
 python /home/mbuurman/galaxy/galaxy/tools/ogc_services/wrap_snap_to_network.py --method "distance" --distance 500 --accumulation 0.5 --coordinate_geojson "{\"inputs\":{\"method\": \"distance\", \"accumulation\": 0.5, \"distance\": 500, \"coordinate_multipoint\":{\"coordinates\": [[-17.25355, -44.885825], [-13.763611, -43.595833]], \"type\": \"MultiPoint\"}}}" 
-
-How Galaxy calls this script:
-python /home/mbuurman/galaxy/galaxy/tools/ogc_services/wrap_snap_to_network.py --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --output $galaxy_output
 
 This script is a wrapper to be called by Galaxy.
 It then makes a HTTP request to a OGC service.
 
 NOTE:
-THe OGC service wants the GeoJSON in the parameter named coordinate_multipoint, while this wrapper takes coordinate_geojson or coordinate_csv, to distinguish between both types!
+The OGC service wants the inputs as GeoJSON in the parameter named "coordinate_multipoint",
+while this wrapper takes "coordinate_geojson" or "coordinate_csv", to distinguish between both types!
 
 These are the valid inputs for the OGC service:
-body = {
+{
     "inputs":{
         "method": "distance",
         "distance": 500,
@@ -33,18 +31,15 @@ body = {
         "coordinate_multipoint": {
            "type": "MultiPoint",
            "coordinates": [
-                [-17.25355, -44.885825],
-                [-13.763611, -43.595833]
+                [-44.885825, -17.25355],
+                [-43.595833, -13.763611]
             ]
         }
     }
 }
 
-These are the inputs without newlines and with escaped double-quotes (ready for curl):
-{\"inputs\":{\"method\":\"distance\",\"distance\":500,\"accumulation\":0.5,\"coordinate_multipoint\":{\"type\":\"MultiPoint\",\"coordinates\":[[-17.25355, -44.885825], [-13.763611, -43.595833]]}}}
-
-How to pass the inputs?
-curl -X POST "http://localhost:5000/processes/snap-to-network/execution" -H "Content-Type: application/json" -d "{\"inputs\":{\"method\":\"distance\",\"distance\":500,\"accumulation\":0.5,\"coordinate_multipoint\":{\"type\":\"MultiPoint\",\"coordinates\":[[-17.25355, -44.885825], [-13.763611, -43.595833]]}}}"
+How to call the pygeoapi service that this script calls?
+curl -X POST "http://localhost:5000/processes/snap-to-network/execution" -H "Content-Type: application/json" -d "{\"inputs\":{\"method\":\"distance\",\"distance\":500,\"accumulation\":0.5,\"coordinate_multipoint\":{\"type\":\"MultiPoint\",\"coordinates\":[[-44.885825, -17.25355], [-43.595833, -13.763611]]}}}"
 '''
 
 
@@ -154,7 +149,6 @@ if __name__ == '__main__':
     resp_json = resp.json()
     LOGGER.info('Finished making POST request to server! Received HTTP status code: %s' % resp.status_code)
     LOGGER.info('And this is the server\'s response: \n%s' % resp_json)
-    # Example: {'id': 'snapped_points', 'value': {'type': 'MultiPoint', 'coordinates': [['-43.595833', '-13.763611'], ['-44.885825', '-17.25355']]}}
 
 
     ### Hand through server errors:
@@ -173,4 +167,4 @@ if __name__ == '__main__':
     OUTPUTFILE = args.output
     with open(OUTPUTFILE, 'w') as out:
         geojson.dump(resp_json, out)
-        LOGGER.info('Written to file: %s' % OUTPUTFILE)
+        LOGGER.info('Output written to file: %s' % OUTPUTFILE)
