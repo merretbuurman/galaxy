@@ -7,7 +7,7 @@
         <requirement type="package">geojson</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_snap_to_network.py --ogc_service_url $ogc_service_url --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --output $galaxy_output
+        python $__tool_directory__/wrap_snap_to_network.py --ogc_service_url $ogc_service_url --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --basin_id "$basin_id" --output $galaxy_output
     ]]></command>
     <inputs>
         <param name="coordinate_geojson" type="text" value='{"coordinates":[[-17.25355, -44.885825], [-13.763611, -43.595833]], "type": "MultiPoint"}' area="true" label="Coordinates as GeoJSON Multipoint"></param>
@@ -17,6 +17,10 @@
             <option value="distance">Distance</option>
             <option value="accumulation">Accumulation</option>
             <option value="both">Both</option>
+        </param>
+        <param name="basin_id" type="select" label="Which basin...">
+            <option value="481051">Basin Sao Francisco (I think)</option>
+            <option value="Other">No other basin right now</option>
         </param>
         <param name="distance" type="integer" label="Maximum radius in map pixels." value="500"></param>
         <param name="accumulation" type="float" label="Minimum flow accumulation." value="0.5"></param>

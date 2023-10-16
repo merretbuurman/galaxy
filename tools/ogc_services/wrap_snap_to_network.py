@@ -98,6 +98,7 @@ if __name__ == '__main__':
     parser.add_argument('--output', default="DUMMY", help='Galaxy needs this, but you can just put some dummy string there.')
     parser.add_argument('--coordinate_geojson', default="null", help='GeoJSON Coordinates in which CRS?')
     parser.add_argument('--coordinate_csv', default="null", help='Columns with coordinates in which CRS?')
+    parser.add_argument('--basin_id', default="481051", help='The number of the basin in which to look for species occurences.')
     args = parser.parse_args()
     LOGGER.debug('Getting the input parameters... done.')
 
@@ -135,6 +136,7 @@ if __name__ == '__main__':
             "method" : args.method,
             "distance" : args.distance,
             "accumulation" : args.accumulation,
+            "basin_id": args.basin_id,
             "coordinate_multipoint" : multipoint_to_pass_on
         }
     }
