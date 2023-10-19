@@ -8,7 +8,7 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_get_species_data.py --ogc_service_url $ogc_service_url --species_name "$species_name" --basin_id "$basin_id" --output $galaxy_output
+        python $__tool_directory__/wrap_get_species_data.py --ogc_service_url $ogc_service_url --species_name "$species_name" --basin_id "$basin_id" --output $species_occurrence_json_file
     ]]></command>
     <inputs>
         <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://localhost:5000"></param>
