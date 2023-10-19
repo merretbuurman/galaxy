@@ -25,7 +25,7 @@
         <param name="accumulation" type="float" label="Minimum flow accumulation." value="0.5"></param>
     </inputs>
     <outputs>
-        <data name="snapped_points_json_file" label="Snapped Points as GeoJSON" format="geojson" />
+        <data name="snapped_points_json_file" label="Snapped Points" format="geojson" />
     </outputs>
     <tests>
         <test>
