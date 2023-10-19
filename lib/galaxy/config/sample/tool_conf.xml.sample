@@ -47,12 +47,6 @@
     <tool file="${model_tools_path}/extract_dataset.xml" />
     <tool file="${model_tools_path}/duplicate_file_to_collection.xml" />
   </section>
-  <section id="expression_tools" name="Expression Tools">
-    <tool file="expression_tools/parse_values_from_file.xml"/>
-  </section>
-  <section id="liftOver" name="Lift-Over">
-    <tool file="extract/liftOver_wrapper.xml" />
-  </section>
   <section id="textutil" name="Text Manipulation">
     <tool file="filters/fixedValueColumn.xml" />
     <tool file="filters/catWrapper.xml" />
@@ -86,34 +80,11 @@
     <tool file="filters/sorter.xml" />
     <tool file="filters/grep.xml" />
     <tool file="filters/grep_1.0.1.xml"/>
-    <label id="gff" text="GFF" />
-    <tool file="filters/gff/extract_GFF_Features.xml" />
-    <tool file="filters/gff/gff_filter_by_attribute.xml" />
-    <tool file="filters/gff/gff_filter_by_feature_count.xml" />
-    <tool file="filters/gff/gtf_filter_by_attribute_values_list.xml" />
   </section>
   <section id="group" name="Join, Subtract and Group">
     <tool file="filters/joiner.xml" />
     <tool file="filters/compare.xml" />
     <tool file="stats/grouping.xml" />
-  </section>
-  <section id="fetchAlignSeq" name="Fetch Alignments/Sequences">
-    <tool file="maf/interval2maf_pairwise.xml" />
-    <tool file="maf/maf_split_by_species.xml" />
-    <tool file="maf/interval_maf_to_merged_fasta.xml" />
-    <tool file="maf/genebed_maf_to_fasta.xml" />
-    <tool file="maf/maf_stats.xml" />
-    <tool file="maf/maf_thread_for_species.xml" />
-    <tool file="maf/maf_limit_to_species.xml" />
-    <tool file="maf/maf_limit_size.xml" />
-    <tool file="maf/maf_by_block_number.xml" />
-    <tool file="maf/maf_reverse_complement.xml" />
-    <tool file="maf/maf_filter.xml" />
-  </section>
-  <section id="bxops" name="Operate on Genomic Intervals" version="">
-    <tool file="filters/wiggle_to_simple.xml" />
-    <tool file="stats/aggregate_binned_scores_in_intervals.xml" />
-    <tool file="filters/ucsc_gene_bed_to_exon_bed.xml" />
   </section>
   <section id="stats" name="Statistics">
     <tool file="stats/gsummary.xml" />
@@ -121,13 +92,6 @@
   </section>
   <section id="plots" name="Graph/Display Data">
     <tool file="maf/vcf_to_maf_customtrack.xml" />
-  </section>
-  <section id="hgv" name="Phenotype Association">
-    <tool file="phenotype_association/sift.xml" />
-    <tool file="phenotype_association/linkToGProfile.xml" />
-    <tool file="phenotype_association/linkToDavid.xml" />
-    <tool file="phenotype_association/ldtools.xml" />
-    <tool file="phenotype_association/master2pg.xml" />
   </section>
   <!--
   <section id="interactivetools" name="Interactive tools">
