@@ -119,15 +119,8 @@
   <section id="plots" name="Graph/Display Data">
     <tool file="maf/vcf_to_maf_customtrack.xml" />
   </section>
-  <section id="hgv" name="Phenotype Association">
-    <tool file="phenotype_association/sift.xml" />
-    <tool file="phenotype_association/linkToGProfile.xml" />
-    <tool file="phenotype_association/linkToDavid.xml" />
-    <tool file="phenotype_association/ldtools.xml" />
-    <tool file="phenotype_association/master2pg.xml" />
-  </section>
-  <section name="OGC Services" id="ogc_service">
-    <tool file="../tools/ogc_services/get_species_data.xml" />
+  <section name="AquaInfra" id="aquainfra">
+    <tool file="../tools/aquainfra/get_species_data.xml" />
   </section>
   <!--
   <section id="interactivetools" name="Interactive tools">
