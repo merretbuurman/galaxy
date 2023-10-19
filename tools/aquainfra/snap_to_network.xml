@@ -5,6 +5,7 @@
     </stdio>
     <requirements>
         <requirement type="package">geojson</requirement>
+        <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
         python $__tool_directory__/wrap_snap_to_network.py --ogc_service_url $ogc_service_url --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --basin_id "$basin_id" --output $snapped_points_json_file
