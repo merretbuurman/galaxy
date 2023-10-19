@@ -50,7 +50,8 @@ def csv_to_geojson(input_string, sep=','):
     # Split at newline:
     # If there is a newline in the GUI, it will end up here as "__cn__":
     LOGGER.debug('CSV input before splitting: %s' % input_string)
-    input_string = input_string.split('__cn__')
+    #input_string = input_string.split('__cn__')
+    input_string = input_string.split('\n')
     LOGGER.debug('CSV input after splitting: %s' % input_string)
 
     # Get coords from each line:
@@ -81,7 +82,7 @@ if __name__ == '__main__':
         sys.argv[i] = sys.argv[i].replace('__oc__', '{').replace('__cc__', '}')
         sys.argv[i] = sys.argv[i].replace('__ob__', '[').replace('__cb__', ']')
         sys.argv[i] = sys.argv[i].replace('__dq__', '"')
-        sys.argv[i] = sys.argv[i].replace('__cn__', '')
+        sys.argv[i] = sys.argv[i].replace('__cn__', '\n')
         LOGGER.debug('Same item after replace: "%s"' % sys.argv[i])
         # https://git.bwcloud.uni-freiburg.de/galaxyproject/galaxy/-/blob/5701fe7e108126fda05c33dfe083bd2c7f370db9/tools/filters/grep.py#L71
 
@@ -96,34 +97,26 @@ if __name__ == '__main__':
     parser.add_argument('--distance', default=500, help='Maximum radius in map pixels. The points will be snapped to the next stream within this radius.')
     parser.add_argument('--accumulation', default=0.5, help='Minimum flow accumulation. Points will be snapped to the next stream with a flow accumulation equal or higher than the given value.')
     parser.add_argument('--output', default="DUMMY", help='Galaxy needs this, but you can just put some dummy string there.')
-    parser.add_argument('--coordinate_geojson', default="null", help='GeoJSON Coordinates in which CRS?')
-    parser.add_argument('--coordinate_csv', default="null", help='Columns with coordinates in which CRS?')
+    parser.add_argument('--input_coordinates', default="", help='Coordinates as geojson or csv')
+    parser.add_argument('--input_type', default="", help='Coordinates as geojson or csv')
+    #parser.add_argument('--coordinate_geojson', default="", help='GeoJSON Coordinates in which CRS?')
+    #parser.add_argument('--coordinate_csv', default="", help='Columns with coordinates in which CRS?')
     parser.add_argument('--basin_id', default="481051", help='The number of the basin in which to look for species occurences.')
     args = parser.parse_args()
     LOGGER.debug('Getting the input parameters... done.')
 
 
-    ### Select whether we have CSV or GeoJSON coordinates, parse accordingly:
-    if len(args.coordinate_geojson) == 0:
-        if len(args.coordinate_csv) == 0:
-            err_msg = 'Cannot have both coordinate fields empty! Please pass either a CSV list or a GeoJSON multipoint.'
-            LOGGER.error(err_msg)
-            raise ValueError(err_msg)
-        else:
-            LOGGER.info('Using CSV coordinates: "%s"' % args.coordinate_csv)
-            multipoint_to_pass_on = csv_to_geojson(args.coordinate_csv)
-            LOGGER.debug('Converted the CSV coordinates to multipoint in geojson')
-    else:
-        if len(args.coordinate_csv) == 0:
-            LOGGER.info('Using GeoJSON coordinates! %s' % type(args.coordinate_geojson))
-            LOGGER.debug('These are the coordinates that were passed: %s' % args.coordinate_geojson)
-            multipoint_to_pass_on = geojson.loads(args.coordinate_geojson)
-            LOGGER.debug('Parsed the string geojson to proper geojson object')
-        else:
-            LOGGER.warning('If both coordinate input fields are filled, we use the CSV ones!')
-            LOGGER.info('Using CSV coordinates: "%s"' % args.coordinate_csv)
-            multipoint_to_pass_on = csv_to_geojson(args.coordinate_csv)
-            LOGGER.debug('Converted the CSV coordinates to multipoint in geojson')
+    ### Converting coordinates depending on input type
+    if args.input_type == "geojson":
+        LOGGER.info('Using GeoJSON coordinates! %s' % type(args.input_coordinates))
+        LOGGER.debug('These are the coordinates that were passed: %s' % args.input_coordinates)
+        multipoint_to_pass_on = geojson.loads(args.input_coordinates)
+        LOGGER.debug('Parsed the string geojson to proper geojson object')
+    
+    elif args.input_type == "csv":
+        LOGGER.info('Using CSV coordinates: "%s"' % args.input_coordinates)
+        multipoint_to_pass_on = csv_to_geojson(args.input_coordinates)
+        LOGGER.debug('Converted the CSV coordinates to multipoint in geojson')
 
 
     ### Assemble the HTTP request

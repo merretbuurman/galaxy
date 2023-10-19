@@ -8,12 +8,22 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_snap_to_network.py --ogc_service_url $ogc_service_url --coordinate_geojson "$coordinate_geojson" --coordinate_csv "$coordinate_csv" --distance $distance --method $method --accumulation $accumulation --basin_id "$basin_id" --output $snapped_points_json_file
+        python $__tool_directory__/wrap_snap_to_network.py --ogc_service_url $ogc_service_url --input_type "$input_format.input_type_selector" --input_coordinates "$input_format.input_coordinates" --distance $distance --method $method --accumulation $accumulation --basin_id "$basin_id" --output $snapped_points_json_file
     ]]></command>
     <inputs>
-        <param name="coordinate_geojson" type="text" value='{"coordinates":[[-17.25355, -44.885825], [-13.763611, -43.595833]], "type": "MultiPoint"}' area="true" label="Coordinates as GeoJSON Multipoint"></param>
+        <conditional name="input_format">
+            <param name="input_type_selector" type="select" label="Choose the format of the input coordinates">
+                <option value="geojson" selected="true">GeoJSON</option>
+                <option value="csv">CSV</option>
+            </param>
+            <when value="geojson">
+                <param name="input_coordinates" type="text" value='{"coordinates":[[-17.25355, -44.885825], [-13.763611, -43.595833]], "type": "MultiPoint"}' area="true" label="Coordinates as GeoJSON Multipoint"></param>
+            </when>
+            <when value="csv">
+                <param name="input_coordinates" type="text" value="-17.25355, -44.885825&#10;-13.763611, -43.595833" area="true" label="Coordinates as csv"></param>
+            </when>
+        </conditional>
         <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://localhost:5000"></param>
-        <param name="coordinate_csv" type="text" value="-17.25355, -44.885825&#10;-13.763611, -43.595833" area="true" label="Coordinates as csv"></param>
         <param name="method" type="select" label="Which method to use for snapping:">
             <option value="distance">Distance</option>
             <option value="accumulation">Accumulation</option>
