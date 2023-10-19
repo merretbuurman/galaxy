@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox monitor="true">
   <section id="aquainfra" name="AquaInfra">
+    <tool file="../tools/aquainfra/get_species_data.xml" />
     <tool file="../tools/aquainfra/snap_to_network.xml" />
     <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
   </section>
