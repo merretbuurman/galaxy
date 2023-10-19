@@ -5,6 +5,7 @@
     </stdio>
     <requirements>
         <requirement type="package">geojson</requirement>
+        <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
         python $__tool_directory__/wrap_get_species_data.py --ogc_service_url $ogc_service_url --species_name "$species_name" --basin_id "$basin_id" --output $galaxy_output
@@ -21,7 +22,7 @@
         </param>
     </inputs>
     <outputs>
-        <data name="galaxy_output" format="geojson" />
+        <data name="species_occurrence_json_file" label="Species occurrence coordinates" format="geojson" />
     </outputs>
     <tests>
         <test>

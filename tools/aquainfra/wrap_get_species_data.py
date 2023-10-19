@@ -104,8 +104,12 @@ if __name__ == '__main__':
         raise ValueError(err_msg)
 
 
+    # Remove outer part of output!
+    output_tobereturned = resp_json['value']
+    LOGGER.info('OUTPUT:\n%s' % output_tobereturned)
+
     ### Write to file
     OUTPUTFILE = args.output
     with open(OUTPUTFILE, 'w') as out:
-        geojson.dump(resp_json, out)
+        geojson.dump(output_tobereturned, out)
         LOGGER.info('Output written to file: %s' % OUTPUTFILE)
