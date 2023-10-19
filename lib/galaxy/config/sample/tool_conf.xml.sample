@@ -2,6 +2,7 @@
 <toolbox monitor="true">
   <section id="aquainfra" name="AquaInfra">
     <tool file="../tools/aquainfra/snap_to_network.xml" />
+    <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />

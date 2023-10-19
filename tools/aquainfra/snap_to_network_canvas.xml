@@ -1,0 +1,49 @@
+<tool id="snap_to_network_canvas" name="Snap to network (via canvas)" version="0.1.0">
+    <description>Snaps point coordinates to a network.</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <requirements>
+        <requirement type="package">geojson</requirement>
+    </requirements>
+    <command><![CDATA[
+        python $__tool_directory__/wrap_snap_to_network_canvas.py --ogc_service_url $ogc_service_url --input "$input_coordinates_json_file" --distance $distance --method $method --accumulation $accumulation --basin_id "$basin_id" --output $snapped_points_json_file
+    ]]></command>
+    <inputs>
+        <param type="data" format="geojson" name="input_coordinates_json_file" label="Coordinates"/>
+        <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://localhost:5000"></param>
+        <param name="method" type="select" label="Which method to use for snapping:">
+            <option value="distance">Distance</option>
+            <option value="accumulation">Accumulation</option>
+            <option value="both">Both</option>
+        </param>
+        <param name="basin_id" type="select" label="Which basin...">
+            <option value="481051">Basin Sao Francisco (I think)</option>
+            <option value="Other">No other basin right now</option>
+        </param>
+        <param name="distance" type="integer" label="Maximum radius in map pixels." value="500"></param>
+        <param name="accumulation" type="float" label="Minimum flow accumulation." value="0.5"></param>
+    </inputs>
+    <outputs>
+        <data name="snapped_points_json_file" label="Snapped Points as GeoJSON" format="geojson" />
+    </outputs>
+    <tests>
+        <test>
+            <!--<output name="galaxy_output" file="/galaxy/tools/mytools/test_data/test_output.txt"/>-->
+        </test>
+    </tests>
+    <help><![CDATA[
+        Snap point data to some stream network using GRASS via hydrographr's snap-to-network.
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+            @Manual{,
+                title = {httr2: Perform HTTP Requests and Process the Responses},
+                author = {Hadley Wickham},
+                year = {2023},
+                note = {R package version 0.2.3},
+                url = {https://CRAN.R-project.org/package=httr2},
+            }
+        </citation>
+    </citations>
+</tool>
