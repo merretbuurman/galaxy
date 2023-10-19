@@ -26,7 +26,7 @@
         <param name="accumulation" type="float" label="Minimum flow accumulation." value="0.5"></param>
     </inputs>
     <outputs>
-        <data name="galaxy_output" format="geojson" />
+        <data name="snapped_points" label="Snapped Points as GeoJSON" format="geojson" />
     </outputs>
     <tests>
         <test>
