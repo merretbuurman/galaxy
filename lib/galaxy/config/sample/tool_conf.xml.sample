@@ -5,6 +5,9 @@
     <tool file="../tools/aquainfra/snap_to_network.xml" />
     <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
   </section>
+  <section id="helcom" name="HELCOM">
+    <tool file="../tools/helcom/helcom_1.xml" />
+  </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />
     <tool file="data_source/ucsc_tablebrowser.xml" />
