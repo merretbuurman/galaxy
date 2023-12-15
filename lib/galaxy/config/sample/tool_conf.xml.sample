@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='utf-8'?>
 <toolbox monitor="true">
-  <section id="aquainfra" name="AquaInfra">
+  <section id="aquainfra" name="AquaINFRA">
     <tool file="../tools/aquainfra/get_species_data.xml" />
     <tool file="../tools/aquainfra/snap_to_network.xml" />
     <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
@@ -8,6 +8,7 @@
   <section id="helcom" name="HELCOM">
     <tool file="../tools/helcom/helcom_1.xml" />
     <tool file="../tools/helcom/helcom_2.xml" />
+    <tool file="../tools/helcom/helcom_2b.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />

@@ -1,5 +1,5 @@
-<tool id="helcom_annual_indicators" name="Annual Indicators (1)" version="0.1.0">
-    <description>Get Annual Indicators from HELCOM HEAT, as csv.</description>
+<tool id="helcom_assessment_indicators_b" name="Assessment Indicators (2) with posted csv" version="0.1.0">
+    <description>Get Assessment Indicators from HELCOM HEAT, as csv, version B.</description>
     <stdio>
         <exit_code range="1:" />
     </stdio>
@@ -8,7 +8,7 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_helcom_1.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --combined_chlorophylla_is_weighted "$combined_chlorophylla_is_weighted" --output $annual_indicators_csv
+        python $__tool_directory__/wrap_helcom_2b.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --output $assessment_indicators_csv --input_csv $annual_indicators_csv
     ]]></command>
     <inputs>
         <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://130.225.37.27:5000"></param>
@@ -17,13 +17,10 @@
             <option value="1877-9999">1877-9999</option>
             <option value="2016-2021">2016-2021</option>
         </param>
-        <param name="combined_chlorophylla_is_weighted" type="select" label="Something about chlorophyll...">
-            <option value="true">True</option>
-            <option value="false">False</option>
-        </param>
+        <param type="data" name="annual_indicators_csv" label="Annual_Indicators.csv" format="csv" />
     </inputs>
     <outputs>
-        <data name="annual_indicators_csv" label="Annual_Indicators.csv" format="csv" />
+        <data name="assessment_indicators_csv" label="Assessment_Indicators.csv" format="csv" />
     </outputs>
     <tests>
         <test>
@@ -31,7 +28,7 @@
         </test>
     </tests>
     <help><![CDATA[
-        Run the first steps of HELCOM Eutrophication Assessment Tool (HEAT, see https://github.com/ices-tools-prod/HEAT), until creation of Annual_Indicators.csv.
+        Run the second steps of HELCOM Eutrophication Assessment Tool (HEAT, see https://github.com/ices-tools-prod/HEAT), until creation of Assessment_Indicators.csv.
     ]]></help>
     <citations>
         <citation type="bibtex">
