@@ -9,6 +9,7 @@
     <tool file="../tools/helcom/helcom_1.xml" />
     <tool file="../tools/helcom/helcom_2.xml" />
     <tool file="../tools/helcom/helcom_2b.xml" />
+    <tool file="../tools/helcom/helcom_3b.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />

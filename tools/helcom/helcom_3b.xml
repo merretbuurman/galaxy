@@ -1,0 +1,44 @@
+<tool id="helcom_assessment_b" name="Assessment (3) with posted csv" version="0.1.0">
+    <description>Get Assessment Indicators from HELCOM HEAT, as csv, with posted csv input.</description>
+    <stdio>
+        <exit_code range="1:" />
+    </stdio>
+    <requirements>
+        <requirement type="package">geojson</requirement>
+        <requirement type="package">requests</requirement>
+    </requirements>
+    <command><![CDATA[
+        python $__tool_directory__/wrap_helcom_3b.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --output $assessment_csv --input_csv $assessment_indicators_csv
+    ]]></command>
+    <inputs>
+        <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://130.225.37.27:5000"></param>
+        <param name="assessment_period" type="select" label="Which HELCOM assessment period...">
+            <option value="2011-2016">2011-2016</option>
+            <option value="1877-9999">1877-9999</option>
+            <option value="2016-2021">2016-2021</option>
+        </param>
+        <param type="data" name="assessment_indicators_csv" label="Assessment_Indicators.csv" format="csv" />
+    </inputs>
+    <outputs>
+        <data name="assessment_csv" label="Assessment.csv" format="csv" />
+    </outputs>
+    <tests>
+        <test>
+            <!--<output name="galaxy_output" file="/galaxy/tools/mytools/test_data/test_output.txt"/>-->
+        </test>
+    </tests>
+    <help><![CDATA[
+        Run the third steps of HELCOM Eutrophication Assessment Tool (HEAT, see https://github.com/ices-tools-prod/HEAT), until creation of Assessment.csv.
+    ]]></help>
+    <citations>
+        <citation type="bibtex">
+            @Manual{,
+                title = {httr2: Perform HTTP Requests and Process the Responses},
+                author = {Hadley Wickham},
+                year = {2023},
+                note = {R package version 0.2.3},
+                url = {https://CRAN.R-project.org/package=httr2},
+            }
+        </citation>
+    </citations>
+</tool>
