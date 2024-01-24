@@ -6,10 +6,10 @@
     <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
   </section>
   <section id="helcom" name="HELCOM">
-    <tool file="../tools/helcom/helcom_1.xml" />
-    <tool file="../tools/helcom/helcom_2.xml" />
-    <tool file="../tools/helcom/helcom_2b.xml" />
-    <tool file="../tools/helcom/helcom_3b.xml" />
+    <tool file="../tools/helcom/helcom_a.xml" />
+    <tool file="../tools/helcom/helcom_b_read.xml" />
+    <tool file="../tools/helcom/helcom_b_posted.xml" />
+    <tool file="../tools/helcom/helcom_c_posted.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />

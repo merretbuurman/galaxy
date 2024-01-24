@@ -8,7 +8,7 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_helcom_2.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --output $assessment_indicators_csv
+        python $__tool_directory__/wrap_helcom_b_read.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --output $assessment_indicators_csv
     ]]></command>
     <inputs>
         <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://130.225.37.27:5000"></param>
