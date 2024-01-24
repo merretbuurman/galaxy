@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     ### Assemble the HTTP request
     LOGGER.debug('Assembling the request...')
-    url = args.ogc_service_url.rstrip('/')+'/processes/gridunits/execution'
+    url = args.ogc_service_url.rstrip('/')+'/processes/annual-indicator/execution'
     LOGGER.info('This URL will be queried: %s' % url)
     h = {'accept': 'application/json', 'Content-Type': 'application/json'}
     body = {
