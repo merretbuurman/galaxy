@@ -49,6 +49,8 @@ if __name__ == '__main__':
     parser.add_argument('--assessment_period', default="2011-2016", help='The HELCOM Assessment Period, one of: "1877-9999", "2011-2016" or "2016-2021"')
     parser.add_argument('--input_csv', help='The HELCOM Annual Indicator as CSV')
     parser.add_argument('--ogc_service_url', default="http://130.225.37.27:5000", help='Which service to call, incl. http/https and port, e.g. http://localhost:5000')
+    parser.add_argument('--username', help='The username used to login')
+    parser.add_argument('--password', help='The password used to login')
     parser.add_argument('--output', default="DUMMY", help='Galaxy needs this, but you can just put some dummy string there.')
     args = parser.parse_args()
     LOGGER.debug('Getting the input parameters... done.')
@@ -80,7 +82,8 @@ if __name__ == '__main__':
     ### Make POST request
     LOGGER.debug('Making POST request to server:')
     print('Making POST request to server:')
-    resp = requests.post(url, headers=h, json=body)
+    verify = False # TODO: In production, don't!!
+    resp = requests.post(url, headers=h, json=body, verify=verify, auth=(args.username, args.password))
     #resp_json = resp.json()
     LOGGER.info('Finished making POST request to server! Received HTTP status code: %s' % resp.status_code)
     LOGGER.info('And this is the server\'s response: \n%s...' % resp.text[0:100])

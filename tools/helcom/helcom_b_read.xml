@@ -8,10 +8,19 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_helcom_b_read.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period" --output $assessment_indicators_csv
+        python $__tool_directory__/wrap_helcom_b_read.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period"  --username $username --password $password --output $assessment_indicators_csv
     ]]></command>
     <inputs>
-        <param name="ogc_service_url" type="text" label="OGC API: Which URL to request, including port." value="http://130.225.37.27:5000"></param>
+        <conditional name="service_access">
+            <param name="ogc_service_url" type="select" label="OGC API: Which URL to request, including port." value="http://130.225.37.27:5000">
+                <option value="http://130.225.37.27:5000">http://130.225.37.27:5000</option>
+                <option value="https://130.225.37.27/pygeoapi">https://130.225.37.27/pygeoapi</option>
+            </param>
+            <when value="https://130.225.37.27/pygeoapi">
+                <param name="username" type="text" label="Username"/>
+                <param name="password" type="text" label="Password"/>
+            </when>
+        </conditional>
         <param name="assessment_period" type="select" label="Which HELCOM assessment period...">
             <option value="2011-2016">2011-2016</option>
             <option value="1877-9999">1877-9999</option>
