@@ -1,0 +1,64 @@
+<tool id="streamsegments" name="Get stream segments as geojson" version="@TOOL_VERSION@+galaxy@VERSION_SUFFIX@">
+    <description>Merrets test</description>
+    <macros>
+        <token name="@TOOL_VERSION@">1.32.0</token>
+        <token name="@VERSION_SUFFIX@">0</token>
+    </macros>
+    <requirements>
+        <requirement type="package" version="3.10">r-hydrographr</requirement>
+        <requirement type="package" version="3.10">r-sf</requirement>
+    </requirements>
+    <version_command><![CDATA[
+CLI_command --version
+]]></version_command>
+    <command detect_errors="exit_code"><![CDATA[
+        Rscript '$__tool_directory__/get_stream_segments_from_vector.R' '$path_to_vector_inputs.fields.pathfoo' '$layer_name' '$subc_id' '$stream_segments_geojson' 
+    ]]>
+    </command>
+    <inputs>
+        <param name="path_to_vector_inputs" type="select" label="Select a built-in vector layer" help="If the GTF file for your transcriptome of interest is not listed, contact your Galaxy administrator">
+             <options from_data_table="hydro_vector_sets">
+                 <filter type="sort_by" column="2" />
+                 <validator type="no_options" message="No hydrography90m vector files are available." />
+             </options>
+        </param>
+        <param name="layer_name" type="text" label="Name of the label inside the Geopackage file." value="merged"></param>
+        <param name="subc_id" type="text" label="Numbers of the stream segments (separate by semicolon)." value="166067836"></param>
+
+    </inputs>
+    <outputs>
+        <data name="stream_segments_geojson" label="Stream Segments" format="geojson" />
+    </outputs>
+    <tests>
+        <!-- Ensure bed and GTF inputs and all outputs work -->
+        <test expect_num_outputs="4">
+            <param name="peaks" value="in.bed" ftype="bed"/>
+            <param name="gtf_source_select" value="history"/>
+            <param name="gtf_hist" value="in.gtf"/>
+            <param name="rscript" value="True"/>
+            <param name="rdata" value="True"/>
+            <output name="out_tab" ftype="interval" file="out.int" />
+            <output name="out_plots" file="out.pdf" compare="sim_size"/>
+            <output name="out_rscript">
+                <assert_contents>
+                    <has_text_matching expression="peak_anno.*annotatePeak" />
+                </assert_contents>
+            </output>
+            <output name="out_rdata">
+                <assert_contents>
+                        <has_size value="160346" delta="300"/>
+                </assert_contents>
+            </output>
+        </test>
+    </tests>
+    <help><![CDATA[
+
+.. class:: infomark
+
+**What it does**
+
+]]></help>
+    <citations>
+        <citation type="doi">10.1093/bioinformatics/btv145</citation>
+    </citations>
+</tool>

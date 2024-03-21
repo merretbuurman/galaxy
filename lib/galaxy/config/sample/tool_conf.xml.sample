@@ -4,6 +4,7 @@
     <tool file="../tools/aquainfra/get_species_data.xml" />
     <tool file="../tools/aquainfra/snap_to_network.xml" />
     <tool file="../tools/aquainfra/snap_to_network_canvas.xml" />
+    <tool file="../tools/aquainfra/get_stream_segments_from_vector.xml" />
   </section>
   <section id="getext" name="Get Data">
     <tool file="data_source/upload.xml" />
