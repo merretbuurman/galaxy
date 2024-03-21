@@ -8,7 +8,11 @@
         <requirement type="package">requests</requirement>
     </requirements>
     <command><![CDATA[
-        python $__tool_directory__/wrap_helcom_b_read.py --ogc_service_url $ogc_service_url --assessment_period "$assessment_period"  --username $username --password $password --output $assessment_indicators_csv
+        python $__tool_directory__/wrap_helcom_b_read.py --ogc_service_url ${service_access.ogc_service_url} --assessment_period "$assessment_period"
+        #if $service_access.ogc_service_url == 'https://130.225.37.27/pygeoapi':
+            --username ${service_access.username} --password $password
+        #end if
+        --output $assessment_indicators_csv
     ]]></command>
     <inputs>
         <conditional name="service_access">
